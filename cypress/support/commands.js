@@ -57,6 +57,11 @@ Cypress.Commands.add('search_and_select_product', (product_name) => {
     cy.wait(3000);
     cy.get('.product-list-wrap > div > p > span').invoke('text').should('contain', 'Results for "' + product_name + '"');
 })
+
+//Command to add a product with size, quantity and color
+
+Cypress.Commands.add('Enter the prodict')
+
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
