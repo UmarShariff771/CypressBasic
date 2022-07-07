@@ -50,12 +50,26 @@ Cypress.Commands.add('search_and_select_product', (product_name) => {
 
     //Search the product in the search input field
     cy.get('mat-form-field > div > div > div > input').eq(0)
-        .invoke('attr','data-placeholder')
+        .invoke('attr', 'data-placeholder')
         .should('eq', 'Search all products');
     cy.get('mat-form-field > div > div > div > input').eq(0).type(product_name)
         .eq(0).type('{enter}');
     cy.wait(3000);
     cy.get('.product-list-wrap > div > p > span').invoke('text').should('contain', 'Results for "' + product_name + '"');
+});
+
+//Add to cart a product fromm details page
+Cypress.Commands.add('add_product_to_cart', (productSize, productQty) => {
+
+    //Add size to the product
+    cy.get('#sizeDropdown').click();
+    cy.wait(5000);
+    var sizeList = [];
+    cy.get('#sizeDropdown-panel > mat-option > span > span > span:nth-child(1)').invoke('text').each(($ele) => {
+        sizeList.push($ele.text().trim());
+    }).then(() => {
+        cy.log(sizeList);
+    });
 })
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
